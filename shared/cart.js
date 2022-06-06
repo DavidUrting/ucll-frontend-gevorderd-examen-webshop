@@ -13,8 +13,16 @@ export default class Cart {
     }
 
     updateCart(cartItem) {
-        this._cartItems.push(cartItem);
-        // Indien het reeds bestaat: overschrijven.
-        // Indien = 0 -> verwijderen.
+        let cartItemInCart = this._cartItems.find(ci => ci.productId == cartItem.productId);
+        if (!cartItemInCart) {
+            cartItemInCart = cartItem;
+            this._cartItems.push(cartItemInCart);
+        } else {
+            if (cartItem.amount === 0) {
+                this._cartItems = this._cartItems.find(ci => ci.productId !== cartItem.productId);
+            } else {
+                cartItemInCart.amount = cartItem.amount;
+            }         
+        }
     }
 }
