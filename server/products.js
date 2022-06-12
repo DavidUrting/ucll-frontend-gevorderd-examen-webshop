@@ -1,6 +1,6 @@
 import Product from "../shared/product.js";
 
-const producten = [
+const products = [
     new Product(
         0,
         "USB stick",
@@ -11,4 +11,4 @@ const producten = [
         2.5),
 ];
 
-export default producten;
+export default products;

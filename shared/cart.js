@@ -1,28 +1,53 @@
+import CartItem from "./cart-item.js";
+
 // Objecten van deze klasse stellen een winkelkar voor.
 export default class Cart {
-    constructor(cartItems) {
+    constructor(customerId, cartItems) {
+        this._customerId = customerId;
         if (cartItems) {
-            this._cartItems = cartItems;
+            this._items = cartItems;
         } else {
-            this._cartItems = [];
+            this._items = [];
         }        
     } 
 
-    get items() {
-        return this._cartItems;
+    get customerId() {
+        return this._customerId;
     }
 
-    updateCart(cartItem) {
-        let cartItemInCart = this._cartItems.find(ci => ci.productId == cartItem.productId);
-        if (!cartItemInCart) {
-            cartItemInCart = cartItem;
-            this._cartItems.push(cartItemInCart);
+    get items() {
+        return this._items;
+    }
+
+    addToCart(productId) {
+        let itemInCart = this._items.find(ci => ci.productId === productId);
+        if (!itemInCart) {
+            itemInCart = new CartItem(productId, 1);
+            this._items.push(itemInCart);
         } else {
-            if (cartItem.amount === 0) {
-                this._cartItems = this._cartItems.find(ci => ci.productId !== cartItem.productId);
-            } else {
-                cartItemInCart.amount = cartItem.amount;
-            }         
+            itemInCart.amount++;
         }
+    }
+
+    removeFromCart(productId) {
+        let itemInCart = this._items.find(ci => ci.productId === productId);
+        if (!itemInCart) { 
+            return;
+        }
+        else {
+            itemInCart.amount--;
+            if (itemInCart.amount <= 0) {
+                this._items = this._items.filter(ci => ci.productId !== productId);
+            }
+        }
+    }
+
+    // JSON.stringify zal standaard deze methode aanroepen, alvoerens om te zetten naar een JSON string.
+    // Op deze manier zorgen we ervoor dat er geen _ in de propertynamen zitten.
+    toJSON() {
+        return {
+            productId: this._productId,
+            items: this._items
+        };
     }
 }

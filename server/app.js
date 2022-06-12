@@ -26,23 +26,36 @@ app.get("/api/cart/:customerId", (req, res) => {
         console.log(`Gebruiker ${req.params.customerId} heeft nog geen winkelwagen.`);
     } else {
         res.json(cartOfUser);
-        console.log(`Gebruiker ${req.params.customerId} heeft een winkelwagen met ${cartOfUser.items.length} artikelen in.`);
+        console.log(`Gebruiker ${req.params.customerId} heeft een winkelwagen.`);
     }    
-});
-
+}); 
 
 // HTTP POST /api/cart
 // *******************
-app.post("/api/cart", (req, res) => {
-    let cartItem = new CartItem(req.body.customerId, req.body.productId, req.body.amount);
-    let cartOfUser = usersAndTheirCarts.find(c => c.customerId == cartItem.customerId);
+app.post("/api/cart/:customerId", (req, res) => { 
+    let cartOfUser = usersAndTheirCarts.find(c => c.customerId == req.params.customerId);
     if (!cartOfUser) {
-        cartOfUser = new Cart();
-        usersAndTheirCarts.push(cartOfUser);        
+        cartOfUser = new Cart(req.params.customerId);
+        usersAndTheirCarts.push(cartOfUser); 
     }
-    cartOfUser.addToCart(cartItem);
+    cartOfUser.addToCart(req.body.productId);
+    console.log(cartOfUser);
     res.json(cartOfUser);
 });
+
+// HTTP DELETE /api/cart
+// *******************
+app.delete("/api/cart/:customerId", (req, res) => {
+    let cartOfUser = usersAndTheirCarts.find(c => c.customerId == req.params.customerId);
+    if (!cartOfUser) {
+        res.json(new Cart());
+    }
+    else {
+        cartOfUser.removeFromCart(req.body.productId);
+        res.json(cartOfUser);
+    }
+});
+
 
 // Starten van de server
 app.listen(3000, () => {
