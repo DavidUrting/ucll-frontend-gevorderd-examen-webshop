@@ -1,9 +1,10 @@
+import products from "./products.js"; 
 import CartItem from "./cart-item.js";
 
 // Objecten van deze klasse stellen een winkelkar voor.
 export default class Cart {
-    constructor(customerId, cartItems) {
-        this._customerId = customerId;
+    constructor(username, cartItems) {
+        this._username = username;
         if (cartItems) {
             this._items = cartItems;
         } else {
@@ -11,12 +12,23 @@ export default class Cart {
         }        
     } 
 
-    get customerId() {
-        return this._customerId;
+    get username() {
+        return this._username;
     }
 
     get items() {
         return this._items;
+    }
+
+    get costAfterReduction() {
+        let ourBestPrice = 0;
+        this._items.forEach((item) => {
+            ourBestPrice += (item.amount * products.find(p => p.id === item.productId).cost);
+        });
+        if (ourBestPrice >= 30) {
+            ourBestPrice = ourBestPrice - ourBestPrice * 0.10;
+        }
+        return ourBestPrice;
     }
 
     addToCart(productId) {
@@ -46,8 +58,9 @@ export default class Cart {
     // Op deze manier zorgen we ervoor dat er geen _ in de propertynamen zitten.
     toJSON() {
         return {
-            productId: this._productId,
-            items: this._items
+            username: this._username,
+            items: this._items,
+            costAfterReduction: this.costAfterReduction
         };
     }
 }

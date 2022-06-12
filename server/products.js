@@ -1,4 +1,4 @@
-import Product from "../shared/product.js";
+import Product from "./product.js";
 
 const products = [
     new Product(
@@ -8,7 +8,15 @@ const products = [
     new Product(
         1, 
         "Balpen", 
-        2.5),
+        0.3),
+    new Product(
+        2, 
+        "Schrift A4", 
+        2),
+    new Product(
+        3, 
+        "Notablok A4", 
+        3),            
 ];
 
 export default products;

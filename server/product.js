@@ -18,7 +18,6 @@ export default class Product {
         return this._cost;
     }
 
-
     // JSON.stringify zal standaard deze methode aanroepen, alvoerens om te zetten naar een JSON string.
     // Op deze manier zorgen we ervoor dat er geen _ in de propertynamen zitten.
     toJSON() {
