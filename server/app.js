@@ -3,8 +3,10 @@ import Cart from "./cart.js";
 import CartItem from "./cart-item.js";
 
 import express from "express";
+import cors from "cors";
 const app = express();
 
+app.use(cors()); // Dit zorgt ervoor dat je de API ook kan gebruiken vanop andere locaties.
 app.use(express.static('../client/public'));
 app.use(express.json());
 
