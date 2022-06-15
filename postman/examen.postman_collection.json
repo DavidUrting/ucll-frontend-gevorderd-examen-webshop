@@ -1,17 +1,17 @@
 {
 	"info": {
-		"_postman_id": "b211f63f-8f80-42bd-a2fc-135700f71cce",
-		"name": "Quiz",
+		"_postman_id": "bb3a18ec-e988-4ec7-be2b-d3e9d2ba569e",
+		"name": "ExamenJuni2022",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GET vragen",
+			"name": "GET producten (products)",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/quiz",
+					"raw": "http://localhost:3000/api/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,20 +19,20 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"quiz"
+						"products"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "POST antwoorden",
+			"name": "POST winkelwagen (cart) voor kostprijsberekening",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\"vraagId\": 0, \"gekozenAntwoordIndex\":1}, {\"vraagId\": 1, \"gekozenAntwoordIndex\":3}]",
+					"raw": "[0,0,2,2,2,2,2]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +40,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/quiz",
+					"raw": "http://localhost:3000/api/cart",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -48,7 +48,36 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"quiz"
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST bestelling (order)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"timbernerslee\",\r\n    \"cartItems\": [0,0,2,2,2,2,2]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"order"
 					]
 				}
 			},
