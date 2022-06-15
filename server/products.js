@@ -3,7 +3,7 @@ import Product from "./product.js";
 const products = [
     new Product(
         0,
-        "USB stick",
+        "USB stick 256GB",
         10),
     new Product(
         1, 

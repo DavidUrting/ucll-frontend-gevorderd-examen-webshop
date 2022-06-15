@@ -16,13 +16,4 @@ export default class CartItem {
     set amount(value) {
         this._amount = value;
     }
-
-    // JSON.stringify zal standaard deze methode aanroepen, alvoerens om te zetten naar een JSON string.
-    // Op deze manier zorgen we ervoor dat er geen _ in de propertynamen zitten.
-    toJSON() {
-        return {
-            productId: this._productId,
-            amount: this._amount
-        };
-    }
 }

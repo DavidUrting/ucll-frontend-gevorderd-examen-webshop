@@ -1,15 +1,13 @@
 Zorg ervoor dat [Node](https://nodejs.org/en/download/) geïnstalleerd is.  
 Je kan snel starten door een terminal te openen in deze directory en vervolgens ```npm run start``` uit te voeren. 
-De API van de webapplicatie is dan beschikbaar op [http://localhost:3000/api/products](http://localhost:3000/api/products) en [http://localhost:3000/api/cart/username](http://localhost:3000/api/cart/username).
-'username' moet je vervangen met een gebruikersnaam. Als test werd 'timbernerslee' al toegevoegd.
+De API van de webapplicatie is dan beschikbaar op http://localhost:3000/api/...
 
 De API biedt volgende functionaliteiten: 
 * Een GET request naar http://localhost:3000/api/products geeft een JSON array terug met alle producten van de UCLL webshop. 
-* Een GET request naar http://localhost:3000/api/cart/{username} geeft een JSON object terug met een 'items' array waarin alle producten van de winkelkar van de gebruiker zitten, inclusief het aantal van dat product. In de URL moet je dus ook het klantnaam meegeven. Als de gebruiker nog geen winkelkar heeft is de 'items' array een lege array (length = 0).
-* Een POST request naar http://localhost:3000/api/cart/{username} (met in de body een JSON object dat verwijst naar de id van het product) voegt één artikel van het product toe aan de winkelkar.
-* Een DELETE request naar http://localhost:3000/api/cart/{username} (met in de body een JSON object dat verwijst naar de id van het product) verwijdert één artikel van het product uit de winkelkar.
+* Een POST request naar http://localhost:3000/api/cart berekent de totaalprijs MET korting. In de body moet je de inhoud van je winkelwagen meesturen.
+* Een POST request naar http://localhost:3000/api/order geeft een order ID terug (een UUID string van de vorm "333e4568-e67e-12e4-a654-321114174321"). In de body moet je de inhoud van je winkelwagen meesturen EN ook de username die de bestelling doet.
 
-Meer informatie staat ook als commentaar in de code van /server/app.js en gerelateerde .js bestanden.
+> (!) Meer detailinformatie over de JSON data die je moet sturen of zal ontvangen staat als commentaar in /server/app.js
 
-In de map /postman kan je een 'Postman collection' terugvinden met de GET, POST en DELETE voorbeelden.
+In de map /postman kan je een 'Postman collection' terugvinden met GET en POST requests.
 Deze collection kan je importeren in Postman om de API te testen.

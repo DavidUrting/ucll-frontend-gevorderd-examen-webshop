@@ -1,8 +1,8 @@
 // Objecten van deze klasse stellen de producten van de UCLL webshop voor.
 export default class Product {
-    constructor(id, title, cost) {
+    constructor(id, name, cost) {
         this._id = id;
-        this._title = title;
+        this._name = name;
         this._cost = cost;
     }
 
@@ -10,8 +10,8 @@ export default class Product {
         return this._id;
     }
 
-    get title() {
-        return this._title;
+    get name() {
+        return this._name;
     }
 
     get cost() {
@@ -23,7 +23,7 @@ export default class Product {
     toJSON() {
         return {
             id: this._id,
-            title: this._title,
+            name: this._name,
             cost: this._cost
         };
     }

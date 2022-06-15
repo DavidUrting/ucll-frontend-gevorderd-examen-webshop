@@ -12,14 +12,6 @@ export default class Cart {
         }        
     } 
 
-    get username() {
-        return this._username;
-    }
-
-    get items() {
-        return this._items;
-    }
-
     get totalPriceWithReduction() {
         let ourBestPrice = 0;
         this._items.forEach((item) => {
